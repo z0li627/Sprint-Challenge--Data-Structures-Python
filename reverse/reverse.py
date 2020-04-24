@@ -16,7 +16,7 @@ class Node:
         self.next_node = new_next
 
 
-class LinkedList:
+class LinkedList():
     def __init__(self):
         # reference to the head of the list
         self.head = None
@@ -47,4 +47,14 @@ class LinkedList:
 
     def reverse_list(self, node, prev):
         # You must use recursion for this solution
-        pass
+        def _reverse(curr, prev):
+            if not curr:
+                return prev
+            next = curr.next_node
+            curr.next_node = prev
+            prev = curr
+            curr = next
+            return _reverse(curr, prev)
+ 
+        # update the head of the original linked list 
+        self.head = _reverse(curr=self.head, prev=None)
